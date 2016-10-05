@@ -124,25 +124,65 @@ exports = module.exports = {
     var mycard1 = me.cards[0];
     var mycard2 = me.cards[1];
 
-    function hasDoppiaCoppia(cards){
+    var currentstep = gs.commonCards.length;
 
+    var allcards = mycards.concat(gs.commonCards);
+
+    function groupByRank(cards){
+
+        return cards.reduce(function (acc, curr) {
+            if (typeof acc[curr.rank] == 'undefined') {
+                acc[curr.rank] = 1;
+            } else {
+                acc[curr.rank] += 1;
+            }
+            return acc;
+        }, {});
     }
+
+    function hasCoppia(){
+        return mycard1.rank == mycard2.rank
+    }
+
+    function hasDoublePair(cards){
+        var g = groupByRank(cards);
+        return cards.length >= Object.keys(g).length + 2;
+    }
+
 
     function numRank(card){
         return cards.indexOf(card) + 2;
     }
 
     // do not fold if cards are not shit
-    if( numRank(mycard1.rank) + numRank(mycard2.rank) > 8 && gs.spinCount == 0 )
+    if( numRank(mycard1.rank) + numRank(mycard2.rank) > 8 && currentstep == 0 )
         bet = gs.callAmount;
 
-    if(mycard1.rank == mycard2.rank)
+    // bet if doppia coppia
+    if(hasCoppia())
         bet = gs.callAmount;
 
+    // bet if cards value is more than 20
     if( numRank(mycard1.rank) + numRank(mycard2.rank) > 20 ){
         bet = gs.callAmount;
     }
 
+    if( hasDoublePair(allcards) ){
+        bet = gs.callAmount;
+    }
+
+
+    if (currentstep == 1){
+
+    } else if(currentstep == 2){
+
+
+
+    } else if(currentstep == 3){
+
+
+
+    }
 
     console.log(bet);
 
