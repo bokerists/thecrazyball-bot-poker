@@ -197,6 +197,10 @@ exports = module.exports = {
         bet = gs.callAmount;
     }
 
+    if( hasPair(allcards) ){
+        bet = gs.callAmount;
+    }
+
     if( hasDoublePair(allcards) ){
         bet = gs.minimumRaiseAmount;
     }
@@ -208,8 +212,6 @@ exports = module.exports = {
     if( hasPoker(allcards) ){
         bet = me.chips;
     }
-
-
 
     if (currentstep == 1){
 
