@@ -132,6 +132,9 @@ exports = module.exports = {
         return cards.indexOf(card) + 2;
     }
 
+    // do not fold if cards are not shit
+    if( numRank(mycard1.rank) + numRank(mycard2.rank) > 8 && gs.hand == 1 )
+        bet = gs.callAmount;
 
     if(mycard1.rank == mycard2.rank)
         bet = gs.callAmount;
