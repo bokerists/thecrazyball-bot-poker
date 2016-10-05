@@ -124,9 +124,21 @@ exports = module.exports = {
     var mycard1 = me.cards[0];
     var mycard2 = me.cards[1];
 
-    if(mycard1 == mycard2)
+    function hasDoppiaCoppia(cards){
+
+    }
+
+    function numRank(card){
+        return cards.indexOf(card) + 2;
+    }
+
+
+    if(mycard1.rank == mycard2.rank)
         bet = gs.callAmount;
 
+    if( numRank(mycard1.rank) + numRank(mycard2.rank) > 20 ){
+        bet = gs.callAmount;
+    }
 
 
     console.log(bet);
