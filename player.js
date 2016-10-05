@@ -140,7 +140,15 @@ exports = module.exports = {
         }, {});
     }
 
-    function hasCoppia(){
+    function hasPair(cards){
+        var g = groupByRank(cards);
+        for (var i in g) {
+            if(g[i] === 2) return true;
+        }
+        return false;
+    }
+
+    function hasPairServed(){
         return mycard1.rank == mycard2.rank
     }
 
@@ -151,12 +159,15 @@ exports = module.exports = {
 
     function hasTris(cards){
         var g = groupByRank(cards);
-
         for (var i in g) {
             if(g[i] === 3) return true;
         }
-
         return false;
+    }
+
+    function hasFull(cards){
+        if(hasPair(cards) && hasTris(cards)) return true
+        else return false
     }
 
     function hasPoker(cards){
@@ -178,7 +189,7 @@ exports = module.exports = {
         bet = gs.callAmount;
 
     // bet if doppia coppia
-    if(hasCoppia())
+    if(hasPairServed())
         bet = gs.callAmount;
 
     // bet if cards value is more than 20
@@ -190,9 +201,12 @@ exports = module.exports = {
         bet = gs.minimumRaiseAmount;
     }
 
-    if( hasTris(allcards) || hasPoker(allcards) ){
-
+    if( hasTris(allcards)){
         bet = gs.minimumRaiseAmount * 2;
+    }
+
+    if( hasPoker(allcards) ){
+        bet = me.chips;
     }
 
 
