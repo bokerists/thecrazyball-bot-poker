@@ -121,12 +121,13 @@ exports = module.exports = {
 
     var me = gs.players[gs.me];
     var mycards = me.cards;
-
-    var mycard1 = me.cards[1];
-    var mycard2 = me.cards[2];
+    var mycard1 = me.cards[0];
+    var mycard2 = me.cards[1];
 
     if(mycard1 == mycard2)
         bet = gs.callAmount;
+
+
 
     console.log(bet);
 
