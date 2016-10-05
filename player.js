@@ -146,8 +146,13 @@ exports = module.exports = {
 
     function hasDoublePair(cards){
         var g = groupByRank(cards);
-        return cards.length >= Object.keys(g).length + 2;
+        return cards.length >= 4 && cards.length === Object.keys(g).length + 2;
     }
+
+    // function hasTris(cards){
+    //     var g = groupByRank(cards);
+    //     return cards.length >= 3 && cards.length === Object.keys(g).length + 2;
+    // }
 
 
     function numRank(card){
