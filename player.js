@@ -149,11 +149,25 @@ exports = module.exports = {
         return cards.length >= 4 && cards.length === Object.keys(g).length + 2;
     }
 
-    // function hasTris(cards){
-    //     var g = groupByRank(cards);
-    //     return cards.length >= 3 && cards.length === Object.keys(g).length + 2;
-    // }
+    function hasTris(cards){
+        var g = groupByRank(cards);
 
+        for (var i in g) {
+            if(g[i] === 3) return true;
+        }
+
+        return false;
+    }
+
+    function hasPoker(cards){
+        var g = groupByRank(cards);
+
+        for (var i in g) {
+            if(g[i] === 4) return true;
+        }
+
+        return false;
+    }
 
     function numRank(card){
         return cards.indexOf(card) + 2;
@@ -173,8 +187,14 @@ exports = module.exports = {
     }
 
     if( hasDoublePair(allcards) ){
-        bet = gs.callAmount;
+        bet = gs.minimumRaiseAmount;
     }
+
+    if( hasTris(allcards) || hasPoker(allcards) ){
+
+        bet = gs.minimumRaiseAmount * 2;
+    }
+
 
 
     if (currentstep == 1){
